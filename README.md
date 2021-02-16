@@ -2,7 +2,7 @@
 
 Students will build a simple journal app to practice MVC separation, segues, table views, and persistence.
 
-Journal is an excellent app to practice basic Cocoa Touch principles and design patterns. Students are encouraged to repeat the building journal regularly until they master the principles and patterns and build journals without a guide.
+Journal is an excellent app to practice basic Cocoa Touch principles and design patterns. Students are encouraged to repeat building journal regularly until they master the principles and patterns and build journals without a guide.
 
 Students who complete this project independently can:
 
@@ -47,10 +47,10 @@ Create an Entry model class that will hold title, text, and timestamp properties
 
 Create a model object controller called `EntryController` that will manage creating and deleting entries.
 
-1. Add a new `EntryController.swift` file and define a new `EntryController` class within then class.
+1. Add a new `EntryController.swift` file and define a new `EntryController` class within the class.
 2. Create a `shared` property as a shared instance (hint: remember, shared instances require an important keyword at the beginning of the line of code).
 3. Add an `entries` array property, and set its value to an empty array of `Entry`.
-4. Create a `createEntryWith(title: ...)` function that takes in a `title`, and `body`. It should create a new instance of `Entry` and add it to the `entries` array
+4. Create a `createEntryWith(title: ...)` function that takes in a `title` and `body`. It should create a new instance of `Entry` and add it to the `entries` array
 5. Create a `delete(entry: Entry)` function that removes the entry from the entries array
 * There is no 'removeObject' function on arrays. You will need to first find the index of the object and then remove the object at that index.
 * You will face a compiler error because we have not given the Entry class a way to find equal objects. To resolve the error, implement the Equatable protocol in the next step.
@@ -59,7 +59,7 @@ Create a model object controller called `EntryController` that will manage creat
 
 Implement the Equatable protocol for the Entry class. The Equatable protocol helps to check for equality between variables of a specific class. To ensure that the two objects we are comparing are the same, we will need to make sure the values of all the variables (title, body, and timestamp) are the same. 
 
-1. Conform to the Equatable protocol in an extension to the bottom of the `Entry.swift` file. This will prompt you with and error - use the fix button to add the necessary protocol stub (function).
+1. Conform to the Equatable protocol in an extension to the bottom of the `Entry.swift` file. This will prompt you with an error - use the fix button to add the necessary protocol stub (function).
 2. Return the result of the comparison between the 'lhs' and 'rhs' parameters by checking the property values on each parameter.
 3. If you have not already, go back to your EntryController and finish building out the delete function.
 
@@ -88,7 +88,7 @@ Once you have everything working, make sure to remove the two lines of code we a
 
 ### Detail View
 
-Build a view that allows a user to create a new entry, or view an existing one. Use a UITextField to capture the title, a UITextView to capture the body, a UIBarButtonItem to save the new entry, and a UIButton to clear the title and body text areas.
+Build a view that allows a user to create a new entry or view an existing one. Use a UITextField to capture the title, a UITextView to capture the body, a UIBarButtonItem to save the new entry, and a UIButton to clear the title and body text areas.
 
 The Detail View should follow the 'updateViews' pattern for updating the view elements with the details of a model object. To follow this pattern, add an 'updateViews' function that checks for a model object. The function updates the view with details from the model object.
 
@@ -133,7 +133,7 @@ At this point, everything should be working. However, we do still have one final
 
 ### Add Data Persistence functionality to the EntryController
 
-Our `EntryController` object is the source of truth for entries. We are now going to add a layer of persistent storage. We need to update the `EntryController` to save the entries array to persistent storage when a change happens (whether it be an entry is created or deleted). Will will also need to create the functionality to save to the persistent store and load from it.
+Our `EntryController` object is the source of truth for entries. We are now going to add a layer of persistent storage. We need to update the `EntryController` to save the entries array to persistent storage when a change happens (whether it be an entry is created or deleted). We will also need to create the functionality to save to the persistent store and load from it.
 
 #### Creating the URL
 1. Copy and paste this method into the project. Note that this method returns a URL, which is the URL for the file location where we will be saving our data.
@@ -160,7 +160,7 @@ Local files are separated by components which are forward-slashes. Extensions ar
 #### Loading data from the URL
 1. Write a method called `loadFromPersistentStorage()` that will load the current data from the file on disk where we saved our entries(data). 
 2. Create a constant called `data` to hold the data that you will get back by calling `Data(contentsOf:)`. Now pass in the `fileURL()` as an argument (hint: this is a throwing function).
-3. Call `decode(from:)` on an instance of the JSONDecoder. Assign the return of this function to a constant named `entries`. This function takes in two arguments: a type `[Entry].self`, and your instance of data. It will decode the data into an array of Entry.
+3. Call `decode(from:)` on an instance of the JSONDecoder. Assign the return of this function to a constant named `entries`. This function takes in two arguments: a type `[Entry].self` and your instance of data. It will decode the data into an array of Entry.
 4. Now set self.entries to this array of entries.
 5. Finally, you need to call the `loadFromPersistentStorage()` function. While there are many different places you could do this successfully, for now, go to the `viewDidLoad()` lifecycle method in your `EntryListTableViewController` and call `EntryController.shared.loadFromPersistentStorage()`.
 * Note: The first time you run your app after implementing your persistence functions you will have no saved data, and therefore you will see an error message in your debug console. This is normal. After you have stored data you should not recieve an error message when `loadFromPersistentStorage()` is called.
@@ -170,7 +170,7 @@ Run the app; it should now function properly— make sure to thorougly test for 
 2. Be able to click the add button in the top right corner and navigate to the `EntryDetailViewController`.
 3. Be able to hit the clear button at the bottom of the screen and see you text field and text view become empty.
 4. Click the save button in the top right corner of the `EntryDetailViewController` and be navigated back to the `EntryListTableViewController`, where you should then see your newly created entry.
-5. Be able to click on an entry in the `EntryListTableViewController` and be navigated to the `EntryDetailViewController` where you should see that entry's title and and body text (if you click save here it should simply navigate you back to the `EntryListTableViewController` and your debug console should prompt you with a message that says: "to be implemented tomorrow").
+5. Be able to click on an entry in the `EntryListTableViewController` and be navigated to the `EntryDetailViewController` where you should see that entry's title and body text (if you click save here it should simply navigate you back to the `EntryListTableViewController` and your debug console should prompt you with a message that says: "to be implemented tomorrow").
 
 
 ## Day Two - Controller Implementation
@@ -195,15 +195,15 @@ Create a Journal model class that will hold a title and an entries property.
 
 Create a model object controller called `JournalController` that will manage creating, deleting and updating journals. Steps 6 and 7 are going to take a little bit of thinking. Give it your best shot! If you are stuck for more than 20 minutes send a message in the queue channel.
 
-1. Add a new `JournalController.swift` file and define a new `JournalController` class within then class.
+1. Add a new `JournalController.swift` file and define a new `JournalController` class within the class.
 2. Create a `shared` property as a shared instance.
-3. Add an `journals` array property, and set its value to an empty array of `Journal`.
+3. Add a `journals` array property, and set its value to an empty array of `Journal`.
 4. Create a `createJournalWith(title: String)` function that takes in a `title`. It should create a new instance of `Journal` and add it to the `journals` array
 5. Create a `delete(journal: Journal)` function that removes the journal from the `journals` array.
 * Find the index of the object and then remove the object at that index.
 * You will face a compiler error because we have not given the `Journal` class a way to find equal objects. To resolve the error, implement the Equatable protocol on the `Journal` class.
 6. Create an `addEntryTo(journal: ...)` function that should take in an existing journal as a parameter as well as an entry. In the body of this function append the entry to the journals array of entries.
-7. Create a `removeEntryFrom(journal: ...)` function that should take in an existing journal as a parameter as well as an entry. In the body of this function you will need to find the index of the given entry, and then remove the object at that index from the given journals array of entries.
+7. Create a `removeEntryFrom(journal: ...)` function that should take in an existing journal as a parameter as well as an entry. In the body of this function you will need to find the index of the given entry, and then remove the object at that index from the given journal's array of entries.
 
 ### Add Data Persistence functionality to the JournalController
 
@@ -220,7 +220,7 @@ With our `EntryController` no longer being the best location for our source of t
 
 We still need to do a little more refactoring to our `EntryController`.
 
-1. We no longer need to entries array (former source of truth), because our entries will now will on a journal object. So delete `var entries: [Entry] = []` (ignore any errors for the moment).
+1. We no longer need an entries array (former source of truth), because our entries will now be on a journal object. So delete `var entries: [Entry] = []` (ignore any errors for the moment).
 2. Beause we no longer have an entries source of truth, there is not a need to have a shared instance. Sure, it gives us access to these functions, but that is not a good enough reason to have a shared instance. So delete `static let shared = EntryController()`.
 
 We have now trimmed down our `EntryController` significantly, and what remains has errors. The remaining code is attempting to utilize the entries array that no longer exists. 
@@ -258,11 +258,11 @@ Create a view controller called `JournalListViewController` that will manage you
 *_Don't forget to set your dataSource and delegate for your  `journalListTableView` (hint: this will prompt you with an error, fix it)._
 6. Build out your two dataSource functions `numberOfRowsInSection` and `cellForRowAt`. 
 *_In `cellForRowAt`, include the title of your journal and the count of it's entries. You will notice that `cellForRowAt` does not include a default cell that a tableViewController provides for you. You will need to add this yourself. Give it your best shot. Reference your EntryListTableViewController for help. Reach out in the queue channel if you have not solved it after 20 minutes._
-7. Now, when you navigate (or segue) over to your `EntryListTableViewController`, you need to tell your `EntryListTableViewController` which journals entries to load. This is where `prepare(for segue)` is crucial. This function allows you to pass a specific journal over. Build out your `prepare(for segue)` function, and pass over whichever journal the user selected.
+7. Now, when you navigate (or segue) over to your `EntryListTableViewController`, you need to tell your `EntryListTableViewController` which journal's entries to load. This is where `prepare(for segue)` is crucial. This function allows you to pass a specific journal over. Build out your `prepare(for segue)` function, and pass over whichever journal the user selected.
 *_Hint 1: You will notice that you don't have access to a tableView in your `prepare(for segue)` function. You will need to access the `indexPathForSelectedRow` of your `journalListTableView`._
 *_Hint 2: Make sure to go to your `EntryListTableViewController` and give it a landing pad to receive a journal. This should be an optional Journal._
-8. Let's not forget about our `createNewJournalButtonTapped`. In the body of this IBAction, use the text from your `journalTitleTextField` (making sure it is not empty) to create a new journal. After calling your `createJournalWith()` function, tell your `journalListTableView` to reload it's data, and set the  `journalTitleTextField` back to an empty string.
-9. Finally, before you move on, go up to your lifecycle methods and and the `viewWillAppear()` method. Inside this method, tell your table view to relaod it's data. That way, when you navigate back to this page, you can show the updated amount of entries in any given journal.
+8. Let's not forget about our `createNewJournalButtonTapped`. In the body of this IBAction, use the text from your `journalTitleTextField` (making sure it is not empty) to create a new journal. After calling your `createJournalWith()` function, tell your `journalListTableView` to reload its data, and set the  `journalTitleTextField` back to an empty string.
+9. Finally, before you move on, go up to your lifecycle methods and the `viewWillAppear()` method. Inside this method, tell your table view to reload its data. That way, when you navigate back to this page, you can show the updated amount of entries in any given journal.
 
 
 ### Refactor EntryListTableViewController
@@ -282,7 +282,7 @@ Finally, you can fix some of those errors that have been showing on your `EntryL
 
 ### Refactor EntryDetailViewController
 
-You will notice you still have one error on you `EntryDetailViewController`. It is trying to call `EntryController.shared` which no longer exists.
+You will notice you still have one error on your `EntryDetailViewController`. It is trying to call `EntryController.shared` which no longer exists.
 
 1. Delete that line of code and recall the function without using a shared instance.
 *_You will see that there is still a problem. You need to pass in a journal, but do not have access to one. You will fix this over the next few steps._
@@ -292,10 +292,10 @@ You will notice you still have one error on you `EntryDetailViewController`. It 
 
 ### Update EntryListTableViewController to pass a Journal
 1. Go back to your `prepare(for segue)` method on your `EntryListTableViewController` and pass over your unwrapped journal to your destination's journal property.
-2. Now, while this will pass a journal over to the `EntryDetailViewController` if you select on an existing journal, it will not work if you click the add button in the top right hand corner to create a new entry. To fix this, you need to look at your `prepare(for segue)` method. It has code that checks `if segue.identifier == "showEntry"`. If it does not, however, we still need to pass the journal over. So, add on `else if segue.identifier == "createNewEntry"`. In here, you will need to unwrap the destination and journal, and set the destination's journal property to the value of that unwrapped journal.
+2. Now, while this will pass a journal over to the `EntryDetailViewController` if you select an existing journal, it will not work if you click the add button in the top right hand corner to create a new entry. To fix this, you need to look at your `prepare(for segue)` method. It has code that checks `if segue.identifier == "showEntry"`. If it does not, however, we still need to pass the journal over. So, add on `else if segue.identifier == "createNewEntry"`. In here, you will need to unwrap the destination and journal, and set the destination's journal property to the value of that unwrapped journal.
 *_Hint: Don't forget to give the segue an identifier on your Main.storyboard._
 
-Run your app. You should see a near-complete, working app. If you do not, spend 20 minutes debugging and then send a message in the queue channel if your bugs are  ot resolved. You have one final change to make. At the moment, if we click on a journal's entry, we can see it displayed in the detail view. However, if we make changes to it and click save, none of the changes are actually saved. Instead we see a print out in our debug console saying "We will handle this tomorrow." Well, tomorrow is today, so let's handle it...
+Run your app. You should see a near-complete, working app. If you do not, spend 20 minutes debugging and then send a message in the queue channel if your bugs are not resolved. You have one final change to make. At the moment, if we click on a journal's entry, we can see it displayed in the detail view. However, if we make changes to it and click save, none of the changes are actually saved. Instead we see a print out in our debug console saying "We will handle this tomorrow." Well, tomorrow is today, so let's handle it...
 
 ### Add update( ) to EntryController
 1. At the moment, we don't have a function to update an entry, so go to your `EntryController` and add a static function called `update()`. It should take in 3 parameters: an entry, a title, and a body.
@@ -308,7 +308,7 @@ Run your app. You should see a near-complete, working app. If you do not, spend 
 
 Run your app. It should be working perfectly now! If it does not, spend 20 minutes debugging, and if you cannot solve the problem please send a message in the queue channel.
 
-You might be thinking, "This was a lot of work to refactor this application. Might it have been easier just to rebuild it from scratch?" It might have been. This prompts two thoughts. Firstly, this demonstrates the importance of planning and understanding what you want to include in an app. Propper planning will often save you a lot of time coding. Secondly, it is still of immense benefit to have to refactor applications while learning. It helps you develop a better understanding of how data is moving around your app. Use refacrotring opportunities for this purpose. It is also worth keeping in mind, if you are working on an app that is thousands of lines long you will most certainly not want to rebuild the whole application.
+You might be thinking, "This was a lot of work to refactor this application. Might it have been easier just to rebuild it from scratch?" It might have been. This prompts two thoughts. Firstly, this demonstrates the importance of planning and understanding what you want to include in an app. Proper planning will often save you a lot of time coding. Secondly, it is still of immense benefit to have to refactor applications while learning. It helps you develop a better understanding of how data is moving around your app. Use refactoring opportunities for this purpose. It is also worth keeping in mind, if you are working on an app that is thousands of lines long you will most certainly not want to rebuild the whole application.
 
 ### Black Diamonds
 * You might have noticed that your Entry model includes a timestamp, but it has not been used anywhere. Update your `EntryListTableViewController` scene to have a style of right detail instead of basic. Update your `EntryListTableViewController` file to show the timestamp in the detail text view. _Hint: Do some research on `DateFormatter()`, it can provide you some ways of turning a swift date into a nice looking string._
