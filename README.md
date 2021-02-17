@@ -47,7 +47,7 @@ Create an Entry model class that will hold title, text, and timestamp properties
 
 Create a model object controller called `EntryController` that will manage creating and deleting entries.
 
-1. Add a new `EntryController.swift` file and define a new `EntryController` class within the class.
+1. Add a new `EntryController.swift` file and define a new `EntryController` class within then class.
 2. Create a `shared` property as a shared instance (hint: remember, shared instances require an important keyword at the beginning of the line of code).
 3. Add an `entries` array property, and set its value to an empty array of `Entry`.
 4. Create a `createEntryWith(title: ...)` function that takes in a `title` and `body`. It should create a new instance of `Entry` and add it to the `entries` array
@@ -195,7 +195,7 @@ Create a Journal model class that will hold a title and an entries property.
 
 Create a model object controller called `JournalController` that will manage creating, deleting and updating journals. Steps 6 and 7 are going to take a little bit of thinking. Give it your best shot! If you are stuck for more than 20 minutes send a message in the queue channel.
 
-1. Add a new `JournalController.swift` file and define a new `JournalController` class within the class.
+1. Add a new `JournalController.swift` file and define a new `JournalController` class within then class.
 2. Create a `shared` property as a shared instance.
 3. Add a `journals` array property, and set its value to an empty array of `Journal`.
 4. Create a `createJournalWith(title: String)` function that takes in a `title`. It should create a new instance of `Journal` and add it to the `journals` array
