@@ -2,7 +2,7 @@
 
 Students will build a simple journal app to practice MVC separation, segues, table views, and persistence.
 
-Journal is an excellent app to practice basic Cocoa Touch principles and design patterns. Students are encouraged to repeat building journal regularly until they master the principles and patterns and build journals without a guide.
+Journal is an excellent app to practice basic Cocoa Touch principles and design patterns. Students are encouraged to repeat building journal regularly until they master the principles and patterns, eventually being able to build journal without the help of a guide.
 
 Students who complete this project independently can:
 
@@ -30,16 +30,16 @@ Students who complete this project independently can:
 ### Setup
 
 1. Make sure you have forked and cloned this project
-2. Once you have navigated into this project in terminal (using the cd command), switch over to the starter branch (git checkout starter) and open the project
-3. Create a file structure to organize your code (ex. Resources, Views, etc...). Don't forget to relocate your info.plist
-* Note: When using it git, it is best to not create a folder (ex. Model Controller) until you have a file to put in the folder. Git does not like tracking empty folders.
+2. Once you have navigated into this project using terminal (hint: cd), switch over to the starter branch (hint: git checkout starter) and open the project
+3. Create a file structure to organize your code (ex. Resources, Views, etc...). Don't forget to fix the file path for your info.plist
+* Note: When using git, it is best to not create a folder (ex. Model Controller) until you have a file to put in the folder. Git does not like tracking empty folders. You can use placeholder .swift files, if you would like (ex: placeholderViewController.swift)
 
 ### Entry
 
 Create an Entry model class that will hold title, text, and timestamp properties for each entry.
 
 1. Add a new `Entry.swift` file and define a new `Entry` class.
-2. Add properties for title, body and timestamp (hint: timestamp should not be a String or an Int).
+2. Add properties for title, body and timestamp (hint: timestamp should NOT be a String or an Int).
 3. Add a memberwise initializer that takes parameters for each property.
 * Consider setting a default parameter value for the timestamp.
 
@@ -47,21 +47,21 @@ Create an Entry model class that will hold title, text, and timestamp properties
 
 Create a model object controller called `EntryController` that will manage creating and deleting entries.
 
-1. Add a new `EntryController.swift` file and define a new `EntryController` class within then class.
+1. Add a new `EntryController.swift` file and define a new `EntryController` class.
 2. Create a `shared` property as a shared instance (hint: remember, shared instances require an important keyword at the beginning of the line of code).
 3. Add an `entries` array property, and set its value to an empty array of `Entry`.
-4. Create a `createEntryWith(title: ...)` function that takes in a `title` and `body`. It should create a new instance of `Entry` and add it to the `entries` array
-5. Create a `delete(entry: Entry)` function that removes the entry from the entries array
-* There is no 'removeObject' function on arrays. You will need to first find the index of the object and then remove the object at that index.
+4. Create a `createEntryWith(title: ...)` function that takes in a `title` and `body`. It should create a new instance of `Entry` and add it to the `entries` array.
+5. Create a `delete(entry: Entry)` function that removes an entry from the entries array
+* There is no 'removeObject' function on arrays. You will need to first find the index of the object, and then remove the object at that index.
 * You will face a compiler error because we have not given the Entry class a way to find equal objects. To resolve the error, implement the Equatable protocol in the next step.
 
 ### Equatable Protocol
 
 Implement the Equatable protocol for the Entry class. The Equatable protocol helps to check for equality between variables of a specific class. To ensure that the two objects we are comparing are the same, we will need to make sure the values of all the variables (title, body, and timestamp) are the same. 
 
-1. Conform to the Equatable protocol in an extension to the bottom of the `Entry.swift` file. This will prompt you with an error - use the fix button to add the necessary protocol stub (function).
+1. Conform to the Equatable protocol in an extension at the bottom of the `Entry.swift` file (outside of the Entry class). This will prompt you with an error - use the fix button to add the necessary protocol stub (function).
 2. Return the result of the comparison between the 'lhs' and 'rhs' parameters by checking the property values on each parameter.
-3. If you have not already, go back to your EntryController and finish building out the delete function.
+3. If you have not already, now go back to your EntryController and finish building out the delete function.
 
 ### Entry List View
 
@@ -73,11 +73,11 @@ This view will reload the table view each time it appears in order to display ne
 
 1. Add a UITableViewController as the root view controller in Main.storyboard and embed it into a UINavigationController.
 2. Create an `EntryListTableViewController` file as a subclass of UITableViewController. Set the class of the root view controller scene in your Main.storyboard to be an `EntryListTableViewController`.
-3. Implement the UITableViewDataSource functions using the EntryController `entries` array.
+3. Implement the UITableViewDataSource functions, using the EntryController `entries` array as your source of truth.
 * Pay attention to the `reuseIdentifier` in the Storyboard scene and the `dequeueReusableCell(withIdentifier:for:)` function call.
 4. Set up the cells to display the title of the entry (hint: this will need to be done in the cellForRowAt method). Do not forget to set your cell type to 'basic' on your view controller scene.
-5. Implement the UITableViewDataSource `tableView(_:commit:forRowAt:)` function to enable swipe to delete functionality
-6. Add a UIBarButtonItem to the UINavigationBar. Select 'Add' in the System Item menu from the Identity Inspector to set the button as a plus symbol. These are system bar button items, including localization and other benefits. Don't do anything further with this button, we will take care of it later.
+5. Implement the UITableViewDataSource `tableView(_:commit:forRowAt:)` function to enable swipe to delete functionality.
+6. Add a UIBarButtonItem to the UINavigationBar. Select 'Add' in the System Item menu dropdown, on the Identity Inspector, to set the button as a plus symbol. Don't do anything further with this button, we will take care of it later.
 
 ### Pause and test things out....
 If you run your application now, you should see a tableView with nothing on it. You should also see a plus button in the top right corner that, when tapped, does nothing. While this is correct, it doesn't really give us a way of testing out our code. At the moment, we still have a bit more to implement before we can test anything. This is where mock data becomes useful. In your viewDidLoad lifecycle method, after super.viewDidLoad(), add the following code `EntryController.shared.createEntryWith(title: "Test Title", body: "Test Body")`, followed by `tableView.reloadData()`
@@ -94,14 +94,11 @@ The Detail View should follow the 'updateViews' pattern for updating the view el
 
 1. Add an `EntryDetailViewController` file as a subclass of UIViewController and add an optional `entry` property to the class. You can remove the navigation boiler-plate code.
 2. Add a UIViewController scene to Main.storyboard and set the class to `EntryDetailViewController`
-3. Add a UITextField for the entry's title text to the top of the scene (don't forget to constrain it), add an outlet to the class file called `titleTextField`. Set the delegate relationship by adopting the UITextFieldDelegate protocol in the `EntryDetailViewController` class.
-* Step 3 is something you have not seen before. Take 20 minutes to try and figure out how to do this (use google and stack overflow). If you cannot figure it out, no worries, connect with an instructor via the queue channel.
-4. Implement the delegate function `textFieldShouldReturn` and call the resignFirstResponder() method on the titleTextField to dismiss the keyboard.
-* Like Step 3, Step 4 is something you have not seen before. Take 20 minutes to try and figure out how to do this. If you cannot figure it out, connect with an instructor via the queue channel.
-5. Select your UITextField and give it a default placeholder of "Enter title here..."
-6. Add a UITextView for the entry's body text beneath the title text field and add an outlet to the class file `bodyTextView`.
-7. Give the UITextView a default text of "Write entry here... "
-8. Add a UIButton beneath the body text view and add an IBAction to the class file that clears the text in the titleTextField and bodyTextView.
+3. Add a UITextField for the entry's title text to the top of the scene (don't forget to constrain it), add an outlet to the class file called `titleTextField`. 
+4. Select your UITextField and give it a default placeholder of "Enter title here..."
+5. Add a UITextView for the entry's body text beneath the title text field and add an outlet to the class file `bodyTextView`.
+6. Give the UITextView a default text of "Write entry here... "
+7. Add a UIButton beneath the body text view and add an IBAction to the class file that clears the text in the titleTextField and bodyTextView.
 
 Now, we need to add a save button to the top right corner, but our navigation bar is not present because we have not created a segue from the `EntryListTableViewController` yet. So let's do that, and then we can wrap up our detail view.
 
@@ -111,9 +108,9 @@ Add two separate segues from the List View to the Detail View. The segue from th
 
 1. Add a 'show' segue from the Add button to the EntryDetailViewController scene. This segue will not need an identifier since we will not be passing information using this segue. 
 2. Add a 'show' segue from the table view cell to the EntryDetailViewController scene and give the segue an identifier.
-*When naming the identifier, consider that this segue will be used not only to display an existing entry but also to edit an entry(day 2)*.
+*When naming the identifier, consider that this segue will be used not only to display an existing entry but also to edit an entry( more on this in day 2)*.
 3. Add a `prepare(for segue: UIStoryboardSegue, sender: Any?)` function to the EntryListTableViewController (hint: this comes as part of the boiler-plate code, all you should have to do is uncomment it).
-4. Implement the `prepare(for segue: UIStoryboardSegue, sender: Any?)` function. If the identifier is 'showEntry' (or whatever entry name you used on Step 2) we will pass the selected entry to the DetailViewController, which will call our `updateViews()` function (which we will create shortly).
+4. Implement the `prepare(for segue: UIStoryboardSegue, sender: Any?)` function. If the identifier is 'showEntry' (or whatever name you used on Step 2) we will pass the selected entry to the DetailViewController, which will call our `updateViews()` function (which we will create shortly).
 * You will need to capture the selected entry by using the indexPath of the selected row.
 * Remember that the `updateViews()` function will update the destination view controller with the entry details.
 
@@ -122,12 +119,12 @@ Add two separate segues from the List View to the Detail View. The segue from th
 Hop back to your `EntryDetailViewController` and finish out the remaining steps.
 
 1. Add a UIBarButtonItem to the UINavigationBar as a `Save` System Item and add an IBAction to the class file called `saveButtonTapped`.
-2. In the `saveButtonTapped` IBAction, using an if let (conditional unwrapping) check if the optional `entry` property holds an entry. If it does, add a print statement that says "to be implemented tomorrow". If not (meaning if the `entry` property is nil, call the `createEntryWith()` function on the `EntryController`. This will require you to use your outlets to access the users title and body inputs.
-3. Still inside the `saveButtonTapped` IBAction, but outside of the if let, add code to dismiss the current view and pop back to the `EntryListTableViewController`.
+2. In the `saveButtonTapped` IBAction, using an if let (conditional unwrapping), check if the optional `entry` property holds an entry. If it does, add a print statement that says "to be implemented tomorrow". If not (meaning if the `entry` property is nil), call the `createEntryWith()` function that lives on the `EntryController`. This will require you to use your outlets to access the values  in the titleTextField and bodyTextView.
+3. Still inside the `saveButtonTapped` IBAction, but outside the scope of the if let, add code to dismiss the current view and pop back to the `EntryListTableViewController`.
 4. Add an `updateViews()` function that checks if the optional `entry` property holds an entry (hint: use a guard statement to do this). If it does, implement the function to update all view elements that reflect details about the model object `entry` (in this case, the titleTextField and bodyTextView)
 5. Update the `viewDidLoad()` function to call `updateViews()`
 
-At this point your app should be working almost perfectly. You might notice, however, when you create a new entry and navigate back to the `EntryListTableViewController`, your new entry is not there. To fix this, call the method to reload your tableView's data inside of the `viewWillAppear()` function (hint: you will need to add this lifecycle method to your code).
+At this point your app should be working almost perfectly. You might notice, however, when you create a new entry and navigate back to the `EntryListTableViewController`, your new entry is not there. To fix this, call the method to reload your tableView's data inside of the `viewWillAppear()` function on your TableViewController (hint: you will need to add this lifecycle method, viewWillAppear, to your code).
 
 At this point, everything should be working. However, we do still have one final problem. If we stop the app and re-run it, none of our data is there. To solve this, we are going to need to add persistence. 
 
@@ -165,8 +162,8 @@ Local files are separated by components which are forward-slashes. Extensions ar
 5. Finally, you need to call the `loadFromPersistentStorage()` function. While there are many different places you could do this successfully, for now, go to the `viewDidLoad()` lifecycle method in your `EntryListTableViewController` and call `EntryController.shared.loadFromPersistentStorage()`.
 * Note: The first time you run your app after implementing your persistence functions you will have no saved data, and therefore you will see an error message in your debug console. This is normal. After you have stored data you should not recieve an error message when `loadFromPersistentStorage()` is called.
 
-Run the app; it should now function properly— make sure to thorougly test for bugs. You should be able to:
-1. Upon launch, see a tableView with all entries (none if you haven't created any or have deleted all of them).
+Run the app; it should now function properly— make sure to thoroughly test for bugs. You should be able to:
+1. Upon launch, see a tableView with all entries (there will be no entries if you haven't created any yet, or have deleted all of them).
 2. Be able to click the add button in the top right corner and navigate to the `EntryDetailViewController`.
 3. Be able to hit the clear button at the bottom of the screen and see you text field and text view become empty.
 4. Click the save button in the top right corner of the `EntryDetailViewController` and be navigated back to the `EntryListTableViewController`, where you should then see your newly created entry.
@@ -314,6 +311,7 @@ You might be thinking, "This was a lot of work to refactor this application. Mig
 * You might have noticed that your Entry model includes a timestamp, but it has not been used anywhere. Update your `EntryListTableViewController` scene to have a style of right detail instead of basic. Update your `EntryListTableViewController` file to show the timestamp in the detail text view. _Hint: Do some research on `DateFormatter()`, it can provide you some ways of turning a swift date into a nice looking string._
 * On your JournalListViewController, adjust the `Create New Journal` button to be grayed out and unselectable if the `journalTitleTextField` is empty.
 * Add support for tags on journals, add functionality to select a tag to display a list of entries with that tag.
+* Set the delegate relationship by adopting the UITextFieldDelegate protocol in the `EntryDetailViewController` class. Implement the delegate function `textFieldShouldReturn` and call the resignFirstResponder() method on the titleTextField to dismiss the keyboard.
 
 ## Copyright
 
