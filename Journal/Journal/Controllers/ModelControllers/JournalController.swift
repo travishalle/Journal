@@ -1,5 +1,5 @@
 //
-//  EntryController.swift
+//  JournalController.swift
 //  Journal
 //
 //  Created by Travis Halle on 4/20/21.
